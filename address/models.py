@@ -72,7 +72,7 @@ def _to_python(value):
 
     # Handle the locality.
     try:
-        locality_obj = Locality.objects.get(name=locality, state=state_obj)
+        locality_obj = Locality.objects.get(name=locality, postal_code=postal_code, state=state_obj)
     except Locality.DoesNotExist:
         if locality:
             locality_obj = Locality.objects.create(name=locality, postal_code=postal_code, state=state_obj)
@@ -196,7 +196,7 @@ class Locality(models.Model):
 
     class Meta:
         verbose_name_plural = 'Localities'
-        unique_together = ('name', 'state')
+        unique_together = ('name', 'postal_code', 'state')
         ordering = ('state', 'name')
 
     def __str__(self):
