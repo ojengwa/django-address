@@ -115,6 +115,15 @@ def _to_python(value):
         # Need to save.
         address_obj.save()
 
+    # Handle cases where coordinates passed in do not match the existing object
+    # In these cases, we should probably assume the coordinates passed in are
+    # corrections to the existing coordinates.
+    if all([latitude == address_obj.latitude,
+            longitude == address_obj.longitude]):
+        address_obj.latitude = latitude
+        address_obj.longitude = longitude
+        address_obj.save()
+
     # Done.
     return address_obj
 
