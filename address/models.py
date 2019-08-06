@@ -118,8 +118,8 @@ def _to_python(value):
     # Handle cases where coordinates passed in do not match the existing object
     # In these cases, we should probably assume the coordinates passed in are
     # corrections to the existing coordinates.
-    if all([latitude == address_obj.latitude,
-            longitude == address_obj.longitude]):
+    if all([latitude != address_obj.latitude,
+            longitude != address_obj.longitude]):
         address_obj.latitude = latitude
         address_obj.longitude = longitude
         address_obj.save()
